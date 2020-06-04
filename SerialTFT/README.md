@@ -1,7 +1,7 @@
 # SerialTFT Driver for M5LCD
  Copyright (C), 2020, @tomorrow56 (a.k.a. ThousanDIY)
 
-# Command Support
+# Supported command
     int16_t height();
     int16_t width();
 
@@ -26,16 +26,17 @@
     void setTextColor(uint16_t color, uint16_t backgroundcolor);
     void setTextSize(uint8_t size);
     void setTextWrap(boolean w);
-//    void printf();
     void print(String text);
     void println(String text);
     void println();
+
+
     void drawCentreString(String text, int dX, int poY, int font);
     void drawRightString(String text, int dX, int poY, int font);
-//    void drawJpgFile(fs::FS &fs, const char *path, uint16_t x, uint16_t y);
-//    void drawBmpFile(fs::FS &fs, const char *path, uint16_t x, uint16_t y);
+
+
     void progressBar(int x, int y, int w, int h, uint8_t val);
-    void qrcode(String text, uint16_t x, uint16_t y, uint8_t width, uint8_t version);  //2(32byte), 5(106byte), 15(520byte)
+    void qrcode(String text, uint16_t x, uint16_t y, uint8_t width, uint8_t version); // version: 2(32byte), 5(106byte), 15(520byte)
 
     void setRotation(int angle);
     uint16_t color565(uint8_t r, uint8_t g, uint8_t b);
