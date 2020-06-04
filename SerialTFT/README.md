@@ -30,10 +30,8 @@
     void println(String text);
     void println();
 
-
     void drawCentreString(String text, int dX, int poY, int font);
     void drawRightString(String text, int dX, int poY, int font);
-
 
     void progressBar(int x, int y, int w, int h, uint8_t val);
     void qrcode(String text, uint16_t x, uint16_t y, uint8_t width, uint8_t version); // version: 2(32byte), 5(106byte), 15(520byte)
