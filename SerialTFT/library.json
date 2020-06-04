@@ -1,0 +1,21 @@
+{
+  "name": "SerialTFT",
+  "version": "0.0.1",
+  "keywords": "Arduino, tft, display, Serial2",
+  "description": "M5Stack LCD with Serial2 Connection for SPRESENSE",
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/tomorrow56/SerialTFT"
+  },
+  "authors":
+  [
+    {
+        "name": "tomorrow56",
+        "email": "tomorrow56@gmail.com",
+        "maintainer": true
+    }
+  ],
+  "frameworks": "arduino",
+  "platforms": "sonyspresense"
+}
