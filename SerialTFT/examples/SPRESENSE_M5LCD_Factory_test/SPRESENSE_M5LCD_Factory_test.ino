@@ -1,8 +1,14 @@
+#include <LowPower.h>
+
 #include <Wire.h>
 #include "SerialTFT.h"
 
 #include "DHT12.h"
 #include "Seeed_BMP280.h"
+
+#define PUSH_SHORT 1  //count of remove chattering
+uint8_t count_low = 0;
+#define RST_PIN 19
 
 SerialTFT tft = SerialTFT();
 
@@ -32,6 +38,11 @@ void setup() {
   Wire.begin();
   Serial.println("SPRESENSE-M5LCD Factory Test");
 
+  // Initialize LowPower library
+  LowPower.begin();
+
+  pinMode(RST_PIN, INPUT);
+
   tft.begin(921600);
   tft.setRotation(1);
 
@@ -40,7 +51,7 @@ void setup() {
   tft.setCursor(0, 10);
   tft.setTextColor(BLUE, WHITE);
   tft.println("SPRESENSE Grove Test");
-  delay(1000);
+  delay(500);
 
   tft.setTextSize(2);
 
@@ -71,6 +82,24 @@ void setup() {
 }
 
 void loop() {
+
+  //Scan RESET_PIN check
+  if(digitalRead(RST_PIN) == LOW){  // remove chattering
+    if(count_low <= PUSH_SHORT){
+      count_low ++;
+    }
+  }else{
+    count_low = 0;
+  }
+
+  if(count_low == PUSH_SHORT){
+    Serial.print("Reboot...");
+    tft.fillScreen(BLACK);
+    tft.setCursor(0, 10);
+    tft.print("Reboot...");
+    delay(200);
+    LowPower.reboot();
+  }
 
   pressure = bmp280.getPressure();
   temp = bmp280.getTemperature();
@@ -127,6 +156,6 @@ void loop() {
   tft.setCursor(X_pitch * 13, 10 + Y_pitch * 6);
   tft.println(String(AIN5_V));
 
-  delay(500);
+  delay(100);
 
 }
