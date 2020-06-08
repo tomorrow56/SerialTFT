@@ -20,25 +20,12 @@ void setup() {
   // Serial2.begin(unsigned long baud, uint32_t config, int8_t rxPin, int8_t txPin, bool invert)
   Serial2.begin(921600, SERIAL_8N1, 16, 17);
   
-  // Reset Spresense
-  pinMode(15, OUTPUT);
-  digitalWrite(15, LOW);
-  delay(500);  
-  digitalWrite(15, HIGH);
 }
 
 String readChar = "";
  
 void loop() {
   M5.update();
-  if(M5.BtnC.wasPressed()){
-    Serial.println("Reset SPRESENSE...");
-    digitalWrite(15, LOW);
-  }
-
-  if(M5.BtnC.wasReleased()){
-    digitalWrite(15, HIGH);
-  }
 
   if(Serial2.available()) {
     int ch = Serial2.read();
