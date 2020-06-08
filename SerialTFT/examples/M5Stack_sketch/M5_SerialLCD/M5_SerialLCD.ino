@@ -5,6 +5,8 @@
 
 //#define debug
 
+#define RST_PIN 13
+
 void setup() {
   M5.begin();
 
@@ -19,13 +21,28 @@ void setup() {
   
   // Serial2.begin(unsigned long baud, uint32_t config, int8_t rxPin, int8_t txPin, bool invert)
   Serial2.begin(921600, SERIAL_8N1, 16, 17);
-  
+
+  // Reset Spresense
+  pinMode(RST_PIN, OUTPUT);
+  digitalWrite(RST_PIN, LOW);
+  delay(500);  
+  digitalWrite(RST_PIN, HIGH);
+
 }
 
 String readChar = "";
  
 void loop() {
   M5.update();
+
+  if(M5.BtnC.wasPressed()){
+    Serial.println("Reset SPRESENSE...");
+    digitalWrite(RST_PIN, LOW);
+  }
+
+  if(M5.BtnC.wasReleased()){
+    digitalWrite(RST_PIN, HIGH);
+  }
 
   if(Serial2.available()) {
     int ch = Serial2.read();
