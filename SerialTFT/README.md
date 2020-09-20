@@ -44,3 +44,6 @@
     void drawFastHLine(int32_t x, int32_t y, int32_t w, uint32_t color);
     void drawFastVLine(int32_t x, int32_t y, int32_t h, uint32_t color);
 
+# For M5Core2 sample
+ Need cuntom Library by lovyan03
+ https://github.com/lovyan03/M5Core2
